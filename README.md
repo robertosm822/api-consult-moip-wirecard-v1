@@ -11,8 +11,8 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     - XML PHP Extension
 
 ## Renomear arquivos: 
- - 'package.json.example' para 'package.json'
- - 'composer.json.example' para 'composer.json'
+ - 'package.json.template' para 'package.json'
+ - 'composer.json.template' para 'composer.json'
 
 ## Instalar as dependencias usando o COMPOSER:
  
