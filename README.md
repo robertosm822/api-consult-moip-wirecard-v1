@@ -19,3 +19,10 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
  
     - composer install
 
+## Crie uma conta SANDBOX no Wirecard: 
+
+    - https://bem-vindo-sandbox.wirecard.com.br/
+
+
+## Recursos a Serem Integrados:
+    - Clientes - https://dev.wirecard.com.br/v2.0/reference#2-clientes-mp
