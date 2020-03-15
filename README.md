@@ -26,3 +26,8 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
 
 ## Recursos a Serem Integrados:
     - Clientes - https://dev.wirecard.com.br/v2.0/reference#2-clientes-mp
+
+
+## Referências de recursos usados:
+ - https://laravel.com/docs/5.5/installation
+ - https://github.com/fruitcake/laravel-cors
