@@ -4,8 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5571ce77d730f8bd5c3e210863bb9cf9",
+    "content-hash": "87928f3a7fe8ae291f8f17de79be5709",
     "packages": [
+        {
+            "name": "artesaos/moip",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/moip.git",
+                "reference": "5d2f93ff5fbc88e05529304d140339161a95570d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/moip/zipball/5d2f93ff5fbc88e05529304d140339161a95570d",
+                "reference": "5d2f93ff5fbc88e05529304d140339161a95570d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.1 || ~5.2 || ~5.3 || ~5.4",
+                "illuminate/support": "~5.1 || ~5.2 || ~5.3 || ~5.4",
+                "moip/moip-sdk-php": "2.2.*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.8.35"
+            },
+            "type": "libraries",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Artesaos\\Moip\\Providers\\MoipServiceProvider"
+                    ],
+                    "aliases": {
+                        "Moip": "Artesaos\\Moip\\Facades\\Moip"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Artesaos\\Moip\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean Cesar Garcia",
+                    "email": "jeancesargarcia@gmail.com"
+                }
+            ],
+            "description": "Integration of MoIP payment intermediary with Laravel 5",
+            "homepage": "http://dev.moip.com.br",
+            "keywords": [
+                "checkout",
+                "gateway",
+                "intermediary",
+                "laravel",
+                "moip",
+                "payment"
+            ],
+            "time": "2018-01-13T22:06:52+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "1.3.0",
@@ -865,16 +930,16 @@
         },
         {
             "name": "moip/moip-sdk-php",
-            "version": "v3.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moip/moip-sdk-php.git",
-                "reference": "c32c90218aa6f2fa85bbefa260c1e457fc80a448"
+                "reference": "dc88cad3a240f16426526697a057c47b2320aebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/c32c90218aa6f2fa85bbefa260c1e457fc80a448",
-                "reference": "c32c90218aa6f2fa85bbefa260c1e457fc80a448",
+                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/dc88cad3a240f16426526697a057c47b2320aebd",
+                "reference": "dc88cad3a240f16426526697a057c47b2320aebd",
                 "shasum": ""
             },
             "require": {
@@ -883,7 +948,7 @@
             },
             "require-dev": {
                 "codacy/coverage": "dev-master",
-                "phpunit/phpunit": "~4.8.35 || ^5.7 || ^6.4"
+                "phpunit/phpunit": "~4.0"
             },
             "type": "libraries",
             "extra": {
@@ -934,7 +999,7 @@
                 "marketplace",
                 "moip"
             ],
-            "time": "2018-01-29T13:31:39+00:00"
+            "time": "2017-11-06T11:19:46+00:00"
         },
         {
             "name": "monolog/monolog",
