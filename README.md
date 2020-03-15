@@ -31,3 +31,10 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
 ## Referências de recursos usados:
  - https://laravel.com/docs/5.5/installation
  - https://github.com/fruitcake/laravel-cors
+
+## Incluir no arquivo `.env` os serguintes valores da API:
+
+    ``
+    MOIP_KEY=yourkeyfortheservice
+    MOIP_TOKEN=yourtokefortheservice
+    MOIP_HOMOLOGATED=keyshomologatedtrueorfalse``
