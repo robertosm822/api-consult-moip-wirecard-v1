@@ -121,7 +121,34 @@ class ClientesController extends Controller
 
     public function createOrderOne(Request $request)
     {
-        
+        /*
+            Enviar IDcustomer
+            Enviar product_name [nome do produto]
+            Enviar qtd_prod [quantidade de produtos]
+            Enviar cod_prod [codigo unico do produto]
+            Enviar valor_prod [valor do produto do tipo inteiro sem decimal]
+        */
+        $form = $request->all();
+        $dataCarrinho = [
+            'id_consumer'   => (isset($form['id_consumer']))? $form['id_consumer']      : '',
+            'product_name'  => (isset($form['product_name']))? $form['product_name']    : '',
+            'qtd_prod'      => (isset($form['qtd_prod']))? $form['qtd_prod']            : '',
+            'cod_prod'      => (isset($form['cod_prod']))? $form['cod_prod']            : '',
+            'valor_prod'    => (isset($form['valor_prod']))? $form['valor_prod']        : '',
+        ];
+        $total = 0;
+        foreach ($dataCarrinho as $key => $value)
+        {
+            if($value === ''){
+                $total += $total++;
+            }  
+           
+        }
+        if($total > 0){
+            return ['Error'=> "Todos os campos são obrigatorios."];
+            exit();
+        }
+
         try {
             
             $idList = self::lerlog("log_clientes.txt");
@@ -134,7 +161,6 @@ class ClientesController extends Controller
                 
                 $order = $moip->orders()->setOwnId(uniqid())
                     ->addItem('Notebook Lenovo', 2, 'SKH1', 350000)
-                    ->addItem('TV Smarth', 1, 'SKTV', 150000)
                     ->setShippingAmount(4500)
                     ->setDiscont(3000)
                     ->setCustomer($customer)
