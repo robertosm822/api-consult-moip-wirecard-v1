@@ -77,3 +77,7 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     * qtd_prod: 1
     * cod_prod: SAN42
     * valor_prod: 158000
+  
+  - http://localhost:8000/api/v1/get-order-by-id/ID_ORDER_CREATED
+
+    Enviar ID de Ordem Criada [GET]
