@@ -69,12 +69,11 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     Enviar cod_prod [codigo unico do produto]    
     Enviar valor_prod [valor do produto do tipo inteiro sem decimal]```
 
+    
     Campos esperados:
 
-    ```
-    id_consumer:CUS-2GLT9JWW74MU
-    product_name: TV 42 Polegas Sansumg
-    qtd_prod: 1
-    cod_prod: SAN42
-    valor_prod: 158000
-    ```
+    * id_consumer:CUS-2GLT9JWW74MU
+    * product_name: TV 42 Polegas Sansumg
+    * qtd_prod: 1
+    * cod_prod: SAN42
+    * valor_prod: 158000
