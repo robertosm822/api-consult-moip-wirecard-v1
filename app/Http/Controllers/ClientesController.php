@@ -122,7 +122,7 @@ class ClientesController extends Controller
     public function createOrderOne(Request $request)
     {
         /*
-            Enviar IDcustomer
+            Enviar IDcustomer (gerado no primeiro link ou no aquivo gerado de log_ordens.txt)
             Enviar product_name [nome do produto]
             Enviar qtd_prod [quantidade de produtos]
             Enviar cod_prod [codigo unico do produto]
@@ -134,7 +134,7 @@ class ClientesController extends Controller
             'product_name'  => (isset($form['product_name']))? $form['product_name']    : '',
             'qtd_prod'      => (isset($form['qtd_prod']))? $form['qtd_prod']            : '',
             'cod_prod'      => (isset($form['cod_prod']))? $form['cod_prod']            : '',
-            'valor_prod'    => (isset($form['valor_prod']))? $form['valor_prod']        : '',
+            'valor_prod'    => (isset($form['valor_prod']))? $form['valor_prod']        : 0,
         ];
         $total = 0;
         foreach ($dataCarrinho as $key => $value)
@@ -157,11 +157,10 @@ class ClientesController extends Controller
                 $moip = \Moip::start();
                 $idCustomers  = explode(",", $idList);
                 $idCliente = $idCustomers[1];
-                $customer = $moip->customers()->get($idCliente);
+                $customer = $moip->customers()->get($dataCarrinho['id_consumer']);
                 
                 $order = $moip->orders()->setOwnId(uniqid())
-                    ->addItem('Notebook Lenovo', 2, 'SKH1', 350000)
-                    ->setShippingAmount(4500)
+                    ->addItem($dataCarrinho['product_name'], (integer)$dataCarrinho['qtd_prod'], $dataCarrinho['cod_prod'], (integer)$dataCarrinho['valor_prod'])
                     ->setDiscont(3000)
                     ->setCustomer($customer)
                     ->create();
