@@ -22,4 +22,5 @@ Route::prefix('v1')->group(function (){
     Route::get('clientes', 'ClientesController@index');
     Route::post('create-customer', 'ClientesController@createCustomer');
     Route::post('create-order', 'ClientesController@createOrderOne');
+    Route::get('get-order-by-id/{id}', 'ClientesController@getOrderById');
 });
