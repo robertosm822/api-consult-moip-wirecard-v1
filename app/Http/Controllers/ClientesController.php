@@ -7,10 +7,13 @@ use App\Cliente;
 
 class ClientesController extends Controller
 {
-    public function index()
+    public function __construct()
     {
         $moip = \Moip::start();
-
+    }
+    
+    public function index()
+    {
         $id = self::lerlog("log_clientes.txt");
         
         $idCliente = [];
@@ -23,7 +26,7 @@ class ClientesController extends Controller
             $idCliente = $idCustomers[0];
         } else {
             try {
-                $customer = $moip->customers()->setOwnId(uniqid())
+                $customer = $this->moip->customers()->setOwnId(uniqid())
                     ->setFullname('Fulano de Tal')
                     ->setEmail('fulano-01@email.com')
                     ->setBirthDate('1988-12-30')
@@ -46,7 +49,7 @@ class ClientesController extends Controller
         }
 
         // Cliente::all();
-        return  json_encode(["idCliente"=>$idCliente]);
+        return  ["idCliente"=>$idCliente];
     }
 
     public function createCustomer(Request $request)
@@ -89,9 +92,8 @@ class ClientesController extends Controller
            
        
         try {
-            $moip = \Moip::start();
-            
-            $customer = $moip->customers()->setOwnId(uniqid())
+                        
+            $customer = $this->moip->customers()->setOwnId(uniqid())
                         ->setFullname($clienteDados['fullname'])
                         ->setEmail($clienteDados['email'])
                         ->setBirthDate($clienteDados['data_nascimento'])
@@ -117,15 +119,34 @@ class ClientesController extends Controller
         return $idCliente;
     }
 
-    public function update(Request $request, Cliente $cliente)
+    public function createOrderOne(Request $request, Cliente $cliente)
     {
-        // $cliente->update($request->all());
-        return [];//$cliente;
+        
+        try {
+            /*
+            $order = $this->moip->orders()->setOwnId(uniqid())
+                ->addItem("bicicleta 1",1, "sku1", 10000)
+                ->addItem("bicicleta 2",1, "sku2", 11000)
+                ->addItem("bicicleta 3",1, "sku3", 12000)
+                ->addItem("bicicleta 4",1, "sku4", 13000)
+                ->addItem("bicicleta 5",1, "sku5", 14000)
+                ->addItem("bicicleta 6",1, "sku6", 15000)
+                ->addItem("bicicleta 7",1, "sku7", 16000)
+                ->addItem("bicicleta 8",1, "sku8", 17000)
+                ->addItem("bicicleta 9",1, "sku9", 18000)
+                ->addItem("bicicleta 10",1, "sku10", 19000)
+                ->setShippingAmount(3000)->setAddition(1000)->setDiscount(5000)
+                ->setCustomer($customer)
+                ->create();
+        
+            dd($order);
+            */
+        } catch (\Exception $e) {
+            dd($e->__toString());
+        }
+        return [];
     }
-    public function show(Cliente $cliente)
-    {
-        return [];//$cliente;
-    }
+   
 
     public function gravarLog($texto, $arquivo)
     {
@@ -159,9 +180,4 @@ class ClientesController extends Controller
         return $conteudo;
     }
 
-    public function destroy(Request $request, Cliente $cliente)
-    {
-        //$cliente->delete();
-        return []; //$cliente;
-    }
 }
