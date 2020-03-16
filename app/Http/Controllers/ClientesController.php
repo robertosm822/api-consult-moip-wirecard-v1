@@ -9,7 +9,7 @@ class ClientesController extends Controller
 {
     public function __construct()
     {
-        $moip = \Moip::start();
+        $_moip = \Moip::start();
     }
     
     public function index()
@@ -26,7 +26,7 @@ class ClientesController extends Controller
             $idCliente = $idCustomers[0];
         } else {
             try {
-                $customer = $this->moip->customers()->setOwnId(uniqid())
+                $customer = $this->_moip->customers()->setOwnId(uniqid())
                     ->setFullname('Fulano de Tal')
                     ->setEmail('fulano-01@email.com')
                     ->setBirthDate('1988-12-30')
@@ -93,7 +93,7 @@ class ClientesController extends Controller
        
         try {
                         
-            $customer = $this->moip->customers()->setOwnId(uniqid())
+            $customer = $this->_moip->customers()->setOwnId(uniqid())
                         ->setFullname($clienteDados['fullname'])
                         ->setEmail($clienteDados['email'])
                         ->setBirthDate($clienteDados['data_nascimento'])
@@ -119,32 +119,37 @@ class ClientesController extends Controller
         return $idCliente;
     }
 
-    public function createOrderOne(Request $request, Cliente $cliente)
+    public function createOrderOne(Request $request)
     {
         
         try {
-            /*
-            $order = $this->moip->orders()->setOwnId(uniqid())
-                ->addItem("bicicleta 1",1, "sku1", 10000)
-                ->addItem("bicicleta 2",1, "sku2", 11000)
-                ->addItem("bicicleta 3",1, "sku3", 12000)
-                ->addItem("bicicleta 4",1, "sku4", 13000)
-                ->addItem("bicicleta 5",1, "sku5", 14000)
-                ->addItem("bicicleta 6",1, "sku6", 15000)
-                ->addItem("bicicleta 7",1, "sku7", 16000)
-                ->addItem("bicicleta 8",1, "sku8", 17000)
-                ->addItem("bicicleta 9",1, "sku9", 18000)
-                ->addItem("bicicleta 10",1, "sku10", 19000)
-                ->setShippingAmount(3000)->setAddition(1000)->setDiscount(5000)
-                ->setCustomer($customer)
-                ->create();
-        
-            dd($order);
-            */
+            
+            $idList = self::lerlog("log_clientes.txt");
+            if($idList != "")
+            {
+                $moip = \Moip::start();
+                $idCustomers  = explode(",", $idList);
+                $idCliente = $idCustomers[1];
+                $customer = $moip->customers()->get($idCliente);
+                
+                $order = $moip->orders()->setOwnId(uniqid())
+                    ->addItem('Notebook Lenovo', 2, 'SKH1', 350000)
+                    ->addItem('TV Smarth', 1, 'SKTV', 150000)
+                    ->setShippingAmount(4500)
+                    ->setDiscont(3000)
+                    ->setCustomer($customer)
+                    ->create();
+                //gravar log de ordens geradas
+                self::gravarLog($order->getId(), "log_ordens.txt");
+                
+                return $order->getId();
+                exit();
+            }
+            return [];
+            
         } catch (\Exception $e) {
-            dd($e->__toString());
+            return ['Error'=> $e->__toString()];
         }
-        return [];
     }
    
 
