@@ -155,9 +155,7 @@ class ClientesController extends Controller
             if($idList != "")
             {
                 $moip = \Moip::start();
-                $idCustomers  = explode(",", $idList);
-                $idCliente = $idCustomers[1];
-                $customer = $moip->customers()->get($dataCarrinho['id_consumer']);
+                $customer = self::getCustomerById($dataCarrinho['id_consumer']);
                 
                 $order = $moip->orders()->setOwnId(uniqid())
                     ->addItem($dataCarrinho['product_name'], (integer)$dataCarrinho['qtd_prod'], $dataCarrinho['cod_prod'], (integer)$dataCarrinho['valor_prod'])
@@ -177,6 +175,12 @@ class ClientesController extends Controller
         }
     }
    
+    public function getCustomerById($id_consumer)
+    {
+        $moip = \Moip::start();
+
+        return $moip->customers()->get($id_consumer);
+    }
 
     public function gravarLog($texto, $arquivo)
     {
