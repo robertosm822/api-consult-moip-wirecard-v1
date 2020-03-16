@@ -228,7 +228,7 @@ class ClientesController extends Controller
         $filter = new \Moip\Helper\Filters;
         $oderById = $moip->orders()->get($idOrder);
         //$oderById = $moip->orders()->getList(null, $filter);
-        return $oderById->getList();
+        return $oderById->getLinks()->links->checkout->payCheckout->redirectHref;
     }
 
     public function gravarLog($texto, $arquivo)
