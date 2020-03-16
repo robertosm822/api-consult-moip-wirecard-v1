@@ -45,7 +45,7 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
 ## Rotas dos seviços criados:
 
   - localhost:8000/api/v1/create-customer [POST]
-   Espera os seguintes campos para envio via POSTMAN ou Formulário:
+   `Espera os seguintes campos para envio via POSTMAN ou Formulário:
     fullname: STRING
     email: STRING
     data_nascimento: STRING_DATA_FORMAT[ANO-MES-DIA]
@@ -56,4 +56,4 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     bairro: STRING
     cidade: STRING
     uf: STRING 2
-    cep: STRING [8] SOMENTE NUMEROS
+    cep: STRING [8] SOMENTE NUMEROS`
