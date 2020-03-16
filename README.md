@@ -42,7 +42,7 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
 ## Inicializar (opcional) o server:
   - php artisan serve
 
-## Rotas dos seviços criados:
+### Rotas dos seviços criados:
 
   - localhost:8000/api/v1/create-customer [POST]
 
