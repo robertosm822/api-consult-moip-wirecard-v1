@@ -121,21 +121,44 @@ class ClientesController extends Controller
 
     public function createOrderOne(Request $request)
     {
-        
+        /*
+            Enviar IDcustomer (gerado no primeiro link ou no aquivo gerado de log_ordens.txt)
+            Enviar product_name [nome do produto]
+            Enviar qtd_prod [quantidade de produtos]
+            Enviar cod_prod [codigo unico do produto]
+            Enviar valor_prod [valor do produto do tipo inteiro sem decimal]
+        */
+        $form = $request->all();
+        $dataCarrinho = [
+            'id_consumer'   => (isset($form['id_consumer']))? $form['id_consumer']      : '',
+            'product_name'  => (isset($form['product_name']))? $form['product_name']    : '',
+            'qtd_prod'      => (isset($form['qtd_prod']))? $form['qtd_prod']            : '',
+            'cod_prod'      => (isset($form['cod_prod']))? $form['cod_prod']            : '',
+            'valor_prod'    => (isset($form['valor_prod']))? $form['valor_prod']        : 0,
+        ];
+        $total = 0;
+        foreach ($dataCarrinho as $key => $value)
+        {
+            if($value === ''){
+                $total += $total++;
+            }  
+           
+        }
+        if($total > 0){
+            return ['Error'=> "Todos os campos são obrigatorios."];
+            exit();
+        }
+
         try {
             
             $idList = self::lerlog("log_clientes.txt");
             if($idList != "")
             {
                 $moip = \Moip::start();
-                $idCustomers  = explode(",", $idList);
-                $idCliente = $idCustomers[1];
-                $customer = $moip->customers()->get($idCliente);
+                $customer = self::getCustomerById($dataCarrinho['id_consumer']);
                 
                 $order = $moip->orders()->setOwnId(uniqid())
-                    ->addItem('Notebook Lenovo', 2, 'SKH1', 350000)
-                    ->addItem('TV Smarth', 1, 'SKTV', 150000)
-                    ->setShippingAmount(4500)
+                    ->addItem($dataCarrinho['product_name'], (integer)$dataCarrinho['qtd_prod'], $dataCarrinho['cod_prod'], (integer)$dataCarrinho['valor_prod'])
                     ->setDiscont(3000)
                     ->setCustomer($customer)
                     ->create();
@@ -152,6 +175,12 @@ class ClientesController extends Controller
         }
     }
    
+    public function getCustomerById($id_consumer)
+    {
+        $moip = \Moip::start();
+
+        return $moip->customers()->get($id_consumer);
+    }
 
     public function gravarLog($texto, $arquivo)
     {

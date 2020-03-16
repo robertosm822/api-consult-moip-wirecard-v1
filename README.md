@@ -47,7 +47,7 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
   - localhost:8000/api/v1/create-customer [POST]
 
    ``Espera os seguintes campos para envio via POSTMAN ou Formulário:
-   
+
     fullname: STRING
     email: STRING
     data_nascimento: STRING_DATA_FORMAT[ANO-MES-DIA]
@@ -59,3 +59,21 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     cidade: STRING
     uf: STRING 2
     cep: STRING [8] SOMENTE NUMEROS``
+
+  - localhost:8000/api/v1/create-order:
+    
+    ```
+    Enviar IDcustomer (gerado no primeiro link ou no aquivo gerado de log_ordens.txt)
+    Enviar product_name [nome do produto]    
+    Enviar qtd_prod [quantidade de produtos]    
+    Enviar cod_prod [codigo unico do produto]    
+    Enviar valor_prod [valor do produto do tipo inteiro sem decimal]```
+
+    
+    Campos esperados:
+
+    * id_consumer:CUS-2GLT9JWW74MU
+    * product_name: TV 42 Polegas Sansumg
+    * qtd_prod: 1
+    * cod_prod: SAN42
+    * valor_prod: 158000
