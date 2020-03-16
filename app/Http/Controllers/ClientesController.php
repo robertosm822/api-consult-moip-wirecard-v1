@@ -157,15 +157,55 @@ class ClientesController extends Controller
                 $moip = \Moip::start();
                 $customer = self::getCustomerById($dataCarrinho['id_consumer']);
                 
-                $order = $moip->orders()->setOwnId(uniqid())
+                $order = $moip->orders()->setOwnId(uniqid());
+                /*
                     ->addItem($dataCarrinho['product_name'], (integer)$dataCarrinho['qtd_prod'], $dataCarrinho['cod_prod'], (integer)$dataCarrinho['valor_prod'])
                     ->setDiscont(3000)
-                    ->setCustomer($customer)
-                    ->create();
+                    ->setCustomer($customer);
+                  */  
+                /*
+                Exemplo apos a criacao da ordem realizar a leitura do array 
+                de itens do carrinho:
+                $items = [
+                            [
+                                'nome'=>'Notebook Lenovo',
+                                'qtd'=> 1,
+                                'SKU'=> 'SKH1',
+                                'amount'=> 350000
+                            ],
+                            [
+                                'nome'=>'TV Smarth',
+                                'qtd'=> 1,
+                                'SKU'=> 'SKTV',
+                                'amount'=> 150000
+                            ]
+                        ];
+                foreach($items as $item) {
+                        $order->addItem($item['nome'], $item['qtd'], $item['sku'], $item['amount']);
+                }
+                */
+                $items = [
+                    [
+                        'nome'=>'Notebook Lenovo',
+                        'qtd'=> 1,
+                        'SKU'=> 'SKH1',
+                        'amount'=> 350000
+                    ],
+                    [
+                        'nome'=>'TV Smarth',
+                        'qtd'=> 1,
+                        'SKU'=> 'SKTV',
+                        'amount'=> 150000
+                    ]
+                ];
+                foreach($items as $item) {
+                    $order->addItem($item['nome'], $item['qtd'], $item['SKU'], $item['amount']);
+                }
+                $order->setCustomer($customer)->create();
                 //gravar log de ordens geradas
                 self::gravarLog($order->getId(), "log_ordens.txt");
                 
-                return $order->getId();
+                return $order->getLinks()->links->checkout->payCheckout->redirectHref;
                 exit();
             }
             return [];
@@ -187,8 +227,8 @@ class ClientesController extends Controller
         $moip = \Moip::start();
         $filter = new \Moip\Helper\Filters;
         $oderById = $moip->orders()->get($idOrder);
-        $oderById = $moip->orders()->getList(null, $filter);
-        return $oderById;
+        //$oderById = $moip->orders()->getList(null, $filter);
+        return $oderById->getList();
     }
 
     public function gravarLog($texto, $arquivo)
