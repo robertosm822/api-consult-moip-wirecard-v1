@@ -59,5 +59,11 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
     cidade: STRING
     uf: STRING 2
     cep: STRING [8] SOMENTE NUMEROS``
-    
+
   - localhost:8000/api/v1/create-order:
+    ``
+    Enviar IDcustomer (gerado no primeiro link ou no aquivo gerado de log_ordens.txt)
+    Enviar product_name [nome do produto]
+    Enviar qtd_prod [quantidade de produtos]
+    Enviar cod_prod [codigo unico do produto]
+    Enviar valor_prod [valor do produto do tipo inteiro sem decimal]``
