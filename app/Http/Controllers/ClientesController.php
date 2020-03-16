@@ -178,8 +178,17 @@ class ClientesController extends Controller
     public function getCustomerById($id_consumer)
     {
         $moip = \Moip::start();
-
+        
         return $moip->customers()->get($id_consumer);
+    }
+
+    public function getOrderById($idOrder)
+    {
+        $moip = \Moip::start();
+        $filter = new \Moip\Helper\Filters;
+        $oderById = $moip->orders()->get($idOrder);
+        $oderById = $moip->orders()->getList(null, $filter);
+        return $oderById;
     }
 
     public function gravarLog($texto, $arquivo)
