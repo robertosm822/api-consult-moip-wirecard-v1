@@ -81,3 +81,8 @@ Laravel 5.5 query API for Wirecard Payment Gateway (MOIP).
   - localhost:8000/api/v1/get-order-by-id/ID_ORDER_CREATED
 
     Enviar ID de Ordem Criada [GET]
+
+    ## Observações importante no Metodo de Links:
+     
+     - \vendor\moip\moip-sdk-php\src\Helper\Links.php 
+     A variável $links deve ser mudada para 'public' para se conseguir resgatar o link direto para checkout.
